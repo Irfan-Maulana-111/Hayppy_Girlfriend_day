@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, My Sweetheart</title>
+  
+  <!-- Font Google & FontAwesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Link File CSS Eksternal -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Floating Hearts Decorative Background -->
+  <div class="bg-hearts" id="bgHearts"></div>
+
+  <!-- Main Card Container -->
+  <div class="card-container">
+
+    <!-- STEP 1: Envelope -->
+    <div class="step-section active" id="step1">
+      <div class="envelope-wrapper" id="envelope" onclick="openEnvelope()">
+        <div class="envelope-flap"></div>
+        <div class="envelope-wax"><i class="fa-solid fa-crown"></i></div>
+      </div>
+      <p class="subtitle" id="envelopeHint">Ketuk pita lilin untuk membuka undangan... ✨</p>
+      
+      <div id="envelopeMessage" style="display: none; width: 100%;">
+        <h2 class="title">Happy Girlfriend Day, My Sweetheart!!!</h2>
+        <p class="subtitle">Akuuu sudahhh menyiapkannn sesuatuuuu yanggg spesialll buattt kamuuu... tekan tombol di bawah untuk memulaiii!</p>
+        <button class="btn-next" onclick="goToStep(2)">Mulai Kejutan <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Secret Diary -->
+    <div class="step-section" id="step2">
+      <h2 class="title">My Secret Diary</h2>
+      <p class="subtitle">Ketuk buku untuk memutar kuncinya & membacanya</p>
+      
+      <div class="diary-book" id="diaryBook" onclick="unlockDiary()">
+        <i class="fa-solid fa-book-bookmark" style="font-size: 3rem;"></i>
+        <p style="margin-top: 10px; font-weight: 600;">My Secret Diary</p>
+        <div class="diary-lock" id="diaryLock"><i class="fa-solid fa-lock"></i></div>
+      </div>
+
+      <div id="diaryLetter" style="display: none; width: 100%;">
+        <div class="letter-paper">
+          <strong>Dearest Love,</strong><br><br>
+          Sayangg, setiap momen bersamamu terasa seperti mimpi yang paling indahhh tauu.... Kamu ituuu segalanyaaa bagiii akuuu – tawa, kehangatan, dan semua warna di hari-hari kuuu.<br><br>
+          Di hariii spesialmuu iniii, akuuu mauuu kamu tahuuu betapaaa berartinyaaa kehadiranmuuu. Kamuuu adalah oranggg favoritkuuu senggg. ❤️
+        </div>
+        <button class="btn-next" style="margin-top: 20px;" onclick="goToStep(3)">See Our Memories <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Memories Photo Stack -->
+    <div class="step-section" id="step3">
+      <h2 class="title">Our Memories</h2>
+      <p class="subtitle">Tarik & lempar tumpukan foto untuk melihattt fotoo cantikk muuu! 📸</p>
+
+      <div class="photo-stack" id="photoStack">
+        <div class="photo-card" onclick="dismissPhoto(this)">
+          <img src="Foto1.jpeg" alt="Memory 1">
+          <div class="photo-caption">The reason why I smile every day 🥰</div>
+        </div>
+        <div class="photo-card" onclick="dismissPhoto(this)">
+          <img src="Foto2.jpeg" alt="Memory 2">
+          <div class="photo-caption">Photobooth date with my favorite person 📸✨</div>
+        </div>
+        <div class="photo-card" onclick="dismissPhoto(this)">
+          <img src="Foto3.jpeg" alt="Memory 3">
+          <div class="photo-caption">Blessed days with my favorite human 🌙✨</div>
+        </div>
+      </div>
+
+      <button class="btn-next" onclick="goToStep(4)">Time for Cake! <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <!-- STEP 4: Cake Cutting -->
+    <div class="step-section" id="step4">
+      <h2 class="title" id="cakeTitle">Time for Cake!</h2>
+      <p class="subtitle" id="cakeSub">Tarik pisau pemotong dari kiri ke kanan untuk membagi kuenya! 🎂</p>
+
+      <div class="cake-container">
+        <div class="candles">
+          <div class="candle"><div class="flame" id="flame1"></div></div>
+          <div class="candle"><div class="flame" id="flame2"></div></div>
+        </div>
+        <div class="cake-layer top"><div class="cut-line" id="cutLine"></div></div>
+        <div class="cake-layer bottom"></div>
+      </div>
+
+      <input type="range" class="slider-cut" id="cutSlider" min="0" max="100" value="0" oninput="handleCakeCut(this.value)">
+
+      <button class="btn-next" id="cakeNextBtn" style="display: none;" onclick="goToStep(5)">Make a Wish <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <!-- STEP 5: Floating Wishes -->
+    <div class="step-section" id="step5">
+      <h2 class="title">Floating Wishes</h2>
+      <p class="subtitle">Pecahkan gelembung sabun kaca 3D untuk mengabulkan harapanmu ! 🫧</p>
+
+      <div class="bubbles-grid" id="bubblesGrid">
+        <div class="bubble-item" onclick="popWish(this, 'Selalu sehat, panjang umur, & dijauhkan dari segala hal buruk ya sayang! 🌸')">Stay Healthy</div>
+        <div class="bubble-item" onclick="popWish(this, 'Semoga harimu selalu dipenuhi tawa ceria dan senyum manismu yang paling indah! 😊')">Stay Happy</div>
+        <div class="bubble-item" onclick="popWish(this, 'Semua impian dan cita-citamu semoga segera tercapai satu per satu! ✨')">Dream Big</div>
+        <div class="bubble-item" onclick="popWish(this, 'Semoga sukses dan dilancarkan dalam segala urusan, studi, maupun karir kedepannya! 🚀')">Be Successful</div>
+        <div class="bubble-item" onclick="popWish(this, 'Semoga kamu selalu merasa dicintai, dihargai, dan dikelilingi kehangatan tulus! ❤️')">Always Loved</div>
+        <div class="bubble-item" onclick="popWish(this, 'Semoga kebersamaan kita selalu penuh kehangatan, kompromi, dan saling melengkapi selamanya! 🎉')">Forever Us</div>
+      </div>
+
+      <div class="wish-display-card" id="wishDisplay">
+        Pilih salah satu gelembung di atas...
+      </div>
+
+      <div style="margin-top: 15px;">
+        <h3 style="color: #ad1457; font-size: 1.1rem;">Happyyy Girlfriendd Dayy, My Loveee ❤️</h3>
+        <p style="font-size: 0.75rem; color: #880e4f; letter-spacing: 1px;">FOREVER & ALWAYS YOURS</p>
+      </div>
+
+      <button class="btn-next" onclick="goToStep(6)">Open Your Gift <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <!-- STEP 6: Gift Box -->
+    <div class="step-section" id="step6">
+      <h2 class="title">Satu Hal Lagi...</h2>
+      <p class="subtitle">Ketuk kotak kado premium untuk membuka hadiah spesialmu! 🎁</p>
+
+      <div class="gift-box" onclick="openGift()">
+        <div class="gift-ribbon-v"></div>
+        <div class="gift-ribbon-h"></div>
+        <div class="gift-bow"><i class="fa-solid fa-ribbon"></i></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- JavaScript Interaktif -->
+  <script>
+    function id(elemId) { return document.getElementById(elemId); }
+
+    /* Generasi Hati Melayang di Background */
+    function createBgHearts() {
+      const container = id('bgHearts');
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('i');
+        heart.className = 'fa-solid fa-heart heart-bg';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+        heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+        heart.style.animationDelay = Math.random() * 5 + 's';
+        container.appendChild(heart);
+      }
+    }
+    createBgHearts();
+
+    /* Navigasi Antar Step */
+    function goToStep(stepNumber) {
+      document.querySelectorAll('.step-section').forEach(sec => sec.classList.remove('active'));
+      id('step' + stepNumber).classList.add('active');
+    }
+
+    /* STEP 1 LOGIC */
+    function openEnvelope() {
+      const env = id('envelope');
+      if (!env.classList.contains('open')) {
+        env.classList.add('open');
+        id('envelopeHint').style.display = 'none';
+        setTimeout(() => {
+          id('envelopeMessage').style.display = 'block';
+        }, 500);
+      }
+    }
+
+    /* STEP 2 LOGIC */
+    function unlockDiary() {
+      const book = id('diaryBook');
+      const lock = id('diaryLock');
+      lock.innerHTML = '<i class="fa-solid fa-lock-open" style="color: #4caf50;"></i>';
+      setTimeout(() => {
+        book.style.display = 'none';
+        id('diaryLetter').style.display = 'block';
+      }, 600);
+    }
+
+    /* STEP 3 LOGIC */
+    function dismissPhoto(card) {
+      card.style.transform = 'translateY(-150px) rotate(20deg)';
+      card.style.opacity = '0';
+      setTimeout(() => {
+        card.style.display = 'none';
+      }, 300);
+    }
+
+    /* STEP 4 LOGIC */
+    function handleCakeCut(val) {
+      const line = id('cutLine');
+      line.style.display = 'block';
+      if (val > 80) {
+        id('flame1').classList.add('off');
+        id('flame2').classList.add('off');
+        id('cakeTitle').innerText = 'Yummy! Buat permohonan...';
+        id('cakeSub').innerText = 'Lilinya sudah padam ditiup cinta! ✨';
+        id('cakeNextBtn').style.display = 'inline-flex';
+      }
+    }
+
+    /* STEP 5 LOGIC */
+    function popWish(element, message) {
+      element.classList.add('popped');
+      id('wishDisplay').innerText = message;
+    }
+
+    /* STEP 6 LOGIC */
+    function openGift() {
+      alert("🎉 Happy Girlfriend Day! Semogaaa cintaa dan kebahagiaannn muuu bersamakuuu selamanyaaaa!!!! ❤️");
+    }
+  </script>
+</body>
+</html>

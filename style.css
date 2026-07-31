@@ -1,0 +1,436 @@
+/* ==========================================
+   RESET & BASIC STYLES
+   ========================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Floating Heart Background Animation */
+.bg-hearts {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.heart-bg {
+  position: absolute;
+  color: rgba(255, 128, 171, 0.4);
+  animation: floatUp 8s infinite linear;
+  bottom: -10%;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Container Multi-Step Card */
+.card-container {
+  position: relative;
+  width: 90%;
+  max-width: 420px;
+  min-height: 520px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  box-shadow: 0 15px 35px rgba(233, 30, 99, 0.15);
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 10;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  transition: all 0.5s ease;
+}
+
+.step-section {
+  display: none;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.step-section.active {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Common Typography & Buttons */
+h2.title {
+  color: #d81b60;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+p.subtitle {
+  color: #880e4f;
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.btn-next {
+  background: linear-gradient(45deg, #ec407a, #d81b60);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 25px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-next:hover {
+  transform: translateY(-2deg);
+  box-shadow: 0 8px 20px rgba(216, 27, 96, 0.4);
+}
+
+/* ==========================================
+   STEP 1: ENVELOPE (SURAT)
+   ========================================== */
+.envelope-wrapper {
+  position: relative;
+  width: 220px;
+  height: 150px;
+  background: #f48fb1;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  margin: 20px 0;
+  perspective: 1000px;
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 110px solid transparent;
+  border-right: 110px solid transparent;
+  border-top: 90px solid #f06292;
+  transform-origin: top;
+  transition: transform 0.6s ease;
+  z-index: 3;
+}
+
+.envelope-wrapper.open .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope-wax {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 36px;
+  background: #ad1457;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffd54f;
+  font-size: 1.1rem;
+  z-index: 4;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: opacity 0.4s;
+}
+
+.envelope-wrapper.open .envelope-wax {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ==========================================
+   STEP 2: SECRET DIARY
+   ========================================== */
+.diary-book {
+  width: 180px;
+  height: 220px;
+  background: linear-gradient(135deg, #e91e63, #880e4f);
+  border-radius: 12px;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.5s;
+}
+
+.diary-lock {
+  font-size: 2.2rem;
+  margin-top: 15px;
+  color: #ffd54f;
+}
+
+.letter-paper {
+  background: #fff9c4;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+  font-family: 'Caveat', cursive;
+  font-size: 1.25rem;
+  color: #4a148c;
+  text-align: left;
+  line-height: 1.5;
+  margin-top: 10px;
+}
+
+/* ==========================================
+   STEP 3: OUR MEMORIES (PHOTO STACK)
+   ========================================== */
+.photo-stack {
+  position: relative;
+  width: 230px;
+  height: 260px;
+  margin: 10px 0;
+}
+
+.photo-card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: white;
+  padding: 12px 12px 35px 12px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.3s ease, opacity 0.3s;
+}
+
+.photo-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.photo-caption {
+  margin-top: 10px;
+  font-weight: 600;
+  color: #d81b60;
+  font-size: 0.9rem;
+}
+
+/* Stack offsets */
+.photo-card:nth-child(1) { transform: rotate(-3deg); z-index: 3; }
+.photo-card:nth-child(2) { transform: rotate(4deg); z-index: 2; }
+.photo-card:nth-child(3) { transform: rotate(-1deg); z-index: 1; }
+
+/* ==========================================
+   STEP 4: TIME FOR CAKE (CUTTING INTERACTION)
+   ========================================== */
+.cake-container {
+  position: relative;
+  width: 200px;
+  height: 180px;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.candles {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 5px;
+}
+
+.candle {
+  width: 8px;
+  height: 30px;
+  background: repeating-linear-gradient(45deg, #fff, #fff 5px, #f48fb1 5px, #f48fb1 10px);
+  position: relative;
+  border-radius: 3px;
+}
+
+.flame {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 14px;
+  background: #ff9800;
+  border-radius: 50% 50% 20% 20%;
+  box-shadow: 0 0 10px #ff9800;
+  animation: flicker 0.6s infinite alternate;
+}
+
+.flame.off {
+  display: none;
+}
+
+@keyframes flicker {
+  0% { transform: translateX(-50%) scale(1); }
+  100% { transform: translateX(-50%) scale(1.2); }
+}
+
+.cake-layer {
+  background: #f8bbd0;
+  border: 3px solid #f06292;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cake-layer.top { width: 130px; height: 50px; }
+.cake-layer.bottom { width: 180px; height: 60px; margin-top: -2px; }
+
+.cut-line {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 100%;
+  background: dashed #ad1457;
+  display: none;
+}
+
+.slider-cut {
+  width: 80%;
+  margin-top: 15px;
+  accent-color: #d81b60;
+}
+
+/* ==========================================
+   STEP 5: FLOATING WISHES (BUBBLES)
+   ========================================== */
+.bubbles-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 15px 0;
+  min-height: 160px;
+}
+
+.bubble-item {
+  background: #f8bbd0;
+  color: #880e4f;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: transform 0.2s, background 0.3s;
+}
+
+.bubble-item:hover {
+  transform: scale(1.08);
+  background: #f48fb1;
+}
+
+.bubble-item.popped {
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.wish-display-card {
+  background: #ffffff;
+  border: 2px dashed #f48fb1;
+  padding: 15px;
+  border-radius: 12px;
+  margin-top: 10px;
+  color: #ad1457;
+  font-size: 0.88rem;
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================
+   STEP 6: GIFT BOX (HADIAH)
+   ========================================== */
+.gift-box {
+  width: 130px;
+  height: 130px;
+  background: #e91e63;
+  position: relative;
+  border-radius: 12px;
+  margin: 25px auto;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  transition: transform 0.3s;
+}
+
+.gift-box:hover {
+  transform: scale(1.05);
+}
+
+.gift-ribbon-v {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 25px;
+  height: 100%;
+  background: #ffd54f;
+}
+
+.gift-ribbon-h {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 25px;
+  background: #ffd54f;
+}
+
+.gift-bow {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  color: #ffd54f;
+}
